@@ -1,46 +1,16 @@
 pipeline {
     agent any
-    
-    environment {
-		DOCKERHUB_CREDENTIALS=credentials('demo')
-	}
     stages {
          stage('clone') {
             steps {
-                git branch: 'main', credentialsId: '27b19aa4-1d01-4704-9eae-c2ce37b95d56', url: 'https://github.com/Anbumathi-0212/Mentoring--Tasks.git'
+                git branch: 'main', url: 'https://github.com/sankardevvinu/projectsupport.git'
             }
          }
         
-
-       stage('Build') {
-
-			steps {
-				sh "docker build -t anbu02/task:tagname /var/lib/jenkins/workspace/node/node"
-			}
-		}
-      
-       stage('Login') {
-
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
-         stage('Push') {
-
-			steps {
-                sh 'docker push anbu02/task:tagname'
-			}
-		
-		}
-        stage('Deploy K8s') {
-            steps {
-             script {
-              //kubernetesDeploy(configs: "node/anbu.yml", kubeconfigId: "kubernetes")
-             //  sh "aws eks --region ap-south-1 update-kubeconfig --name task"
-               sh "kubectl apply -f /var/lib/jenkins/workspace/node/node/anbu.yml"
-        }
-      }
-    }
-        
-    }
-}
+         stage('Build') {
+	      steps {
+		  sh "docker build -t sankardev/task:tagname /var/lib/jenkins/workspace"
+	    }
+	 }
+ }	 
+	 
