@@ -13,13 +13,13 @@ pipeline {
         
          stage('Build') {
 	      steps {
-		  sh "docker build -t sankardev/task:tagname ."
+		  sh "docker build -t sankardev/task:latest ."
 	    }
 	 }
          stage('Push') {
 		  steps {
                 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
-                sh 'docker push sankardev/task:tagname'
+                sh 'docker push sankardev/task:latest'
 			}
 		
 		}
