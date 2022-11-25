@@ -18,6 +18,7 @@ pipeline {
 	 }
          stage('Push') {
 		  steps {
+                sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
                 sh 'docker push sankardev/task:tagname'
 			}
 		
