@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python
+  template:
+    metadata:
+      labels:
+        app: python
+    spec:
+      containers:
+        - name: python-img
+          image: vinuinstinct123/sankardev:version1
+          ports:
+          - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project
+  labels:
+    run: python
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8082
+    protocol: TCP
+  selector:
+    run: python
