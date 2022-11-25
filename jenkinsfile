@@ -1,5 +1,9 @@
 pipeline {
     agent any
+
+    environment {
+		dockerhub=credentials('dockerhub')
+	}    
     stages {
          stage('clone') {
             steps {
@@ -12,6 +16,12 @@ pipeline {
 		  sh "docker build -t sankardev/task:tagname ."
 	    }
 	 }
+         stage('Push') {
+		  steps {
+                sh 'docker push sankardev/task:tagname'
+			}
+		
+		}
  }
 } 	 
 	 
