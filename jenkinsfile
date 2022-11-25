@@ -19,7 +19,7 @@ pipeline {
          stage('Push') {
 		  steps {
                 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin docker.io'
-                sh 'docker push sankardev/task:version1'
+                sh 'docker push vinuinstinct123/sankardev:tagname'
 			}
 		
 		}
