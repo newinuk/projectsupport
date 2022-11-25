@@ -18,8 +18,9 @@ pipeline {
 	 }
          stage('Push') {
 		  steps {
+                sh 'docker tag sankardev/task:version1 vinuinstinct123/sankardev:version1' 
                 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin docker.io'
-                sh 'docker push vinuinstinct123/sankardev:tagname'
+                sh 'docker push vinuinstinct123/sankardev:version1'
 			}
 		
 		}
