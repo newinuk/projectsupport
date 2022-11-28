@@ -7,20 +7,20 @@ pipeline {
     stages {
          stage('clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/sankardevvinu/projectsupport.git'
+                git branch: 'main', url: 'https://github.com/newinuk/newproject.git'
             }
          }
         
          stage('Build') {
 	      steps {
-		  sh "docker build -t sankardev/task:version1 ."
+		  sh "docker build -t ukguy/task:version1 ."
 	    }
 	 }
          stage('Push') {
 		  steps {
-                sh 'docker tag sankardev/task:version1 vinuinstinct123/sankardev:version1' 
+                sh 'docker tag ukguy/task:version1 newinuk/pythonapp:version1' 
                 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin docker.io'
-                sh 'docker push vinuinstinct123/sankardev:version1'
+                sh 'docker push newinuk/pythonapp:version1'
 			}
 		
 		}
